@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookings | Blue Sky Resort</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">Blue Sky Resort</div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="rooms.html">Rooms</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="booking.html" class="active">Booking</a>
+            <a href="contact.html">Contact Us</a>
+        </nav>
+    </header>
+
+    <main class="form-container">
+        <h2>Make a Reservation</h2>
+        <div id="status-message"></div>
+
+        <form action="/api/booking" method="POST">
+            <div class="form-group"><label>Full Name:</label><input type="text" name="name" required></div>
+            <div class="form-group"><label>Email Address:</label><input type="email" name="email" required></div>
+            <div class="form-group"><label>Phone Number:</label><input type="tel" name="phone" value="0769329734" required></div>
+            <div class="form-group">
+                <label>Room Category:</label>
+                <select name="room">
+                    <option value="Standard Cozy">Standard Cozy Room</option>
+                    <option value="Deluxe Ocean View">Deluxe Ocean View</option>
+                    <option value="Executive Suite">Executive Suite</option>
+                </select>
+            </div>
+            <div class="form-group"><label>Check-In Date:</label><input type="date" name="checkin" required></div>
+            <div class="form-group"><label>Check-Out Date:</label><input type="date" name="checkout" required></div>
+            <button type="submit" class="btn">Submit Booking</button>
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Blue Sky Resort. Phone: 0769329734 | Email: amutua691@gmail.com</p>
+    </footer>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const status = urlParams.get('status');
+        const messageDiv = document.getElementById('status-message');
+        if (status === 'success') {
+            messageDiv.innerHTML = "<p class='success-msg'>Reservation received! We will contact you shortly to confirm.</p>";
+        } else if (status === 'error') {
+            messageDiv.innerHTML = "<p class='error-msg'>Oops! Database connection issue. Please check configuration.</p>";
+        }
+    </script>
+</body>
+</html>
